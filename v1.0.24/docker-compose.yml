@@ -22,6 +22,7 @@ services:
     image: neptunesoftware/planet9:v1.0.24
     environment:
       DB_URI_POSTGRES: postgress://myuser:mypassword@db:5432/planet9
+      # Could be either 'disk', 'mongo', 'postgresql', 'mysql'
       DB_TYPE: postgresql
     ports:
       - 8080:8080
