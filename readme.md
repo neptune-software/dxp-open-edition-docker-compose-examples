@@ -6,4 +6,4 @@
 * Access Planet 9 via `localhost:8080`
 * Access your DB GUI via `localhost:3000`
 
-Might only work for `OSX` and `Linux`
+Might only work for `OSX` and `Linux` (not tested on Windows.)
