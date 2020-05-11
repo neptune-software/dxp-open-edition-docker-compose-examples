@@ -1,0 +1,21 @@
+version: "3.1"
+
+services:
+  planet9_a:
+    image: neptunesoftware/planet9:v2.1.2
+    environment:
+      DB_TYPE: sqlite
+      DB_SQLITE_PATH: "./db/planet9.sqlite"
+    ports:
+      - 8080:8080
+    volumes:
+      - "./datadir:/home/planet9/db"
+  planet9_b:
+    image: neptunesoftware/planet9:v2.1.2
+    environment:
+      DB_TYPE: sqlite
+      DB_SQLITE_PATH: "./db/planet9.sqlite"
+    ports:
+      - 8081:8080
+    volumes:
+      - "./datadir:/home/planet9/db"
