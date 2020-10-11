@@ -22,7 +22,12 @@ services:
     image: neptunesoftware/planet9:v2.2.0
     environment:
       DB_URI_POSTGRES: postgress://myuser:mypassword@db:5432/planet9
-      DB_TYPE: postgresql
+      DB_TYPE: sqlite
+      PORT: 8080
+      ENABLE_SSL: "true"
+      SSLCA: MYCA
+      SSLCERT: MYCERT
+      SSLKEY: MYKEY
     ports:
       - 8080:8080
 volumes:
