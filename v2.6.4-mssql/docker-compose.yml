@@ -10,10 +10,10 @@ services:
       SA_PASSWORD: "m8p@assworD"
     ports:
       - 1433:1433
-    volumes:
-      - "pgdataV2160:/var/lib/postgresql/data"
+#    volumes:
+#      - "pgdataV2160MSSQL:/var/opt/mssql/data/"
   planet9:
-    image: neptunesoftware/planet9:v21.6.0
+    image: neptunesoftware/planet9:v2.6.4
     environment:
       DB_TYPE: mssql
       DB_MSSQL_HOST: db
