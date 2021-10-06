@@ -2,26 +2,27 @@ version: '3.1'
 
 services:
   db:
-    image: localmssql:latest
+    image: postgres:11
     restart: always
     environment:
-      ACCEPT_EULA: Y
-      MSSQL_PID: Developer
-      SA_PASSWORD: "m8p@assworD"
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_USER: myuser
+      POSTGRES_DB: planet9
     ports:
-      - 1433:1433
+      - 5432:5432
     volumes:
       - "pgdataV2160:/var/lib/postgresql/data"
+      - ./db-init:/docker-entrypoint-initdb.d
+  dbgui:
+    image: adminer
+    restart: always
+    ports:
+      - 3000:8080
   planet9:
     image: neptunesoftware/planet9:v21.6.0
     environment:
-      DB_TYPE: mssql
-      DB_MSSQL_HOST: db
-      DB_MSSQL_USER: sa
-      DB_MSSQL_PASSWORD: "m8p@assworD"
-      DB_MSSQL_PORT: 1433
-      DB_MSSQL_SCHEMA: planet9
-      DB_MSSQL_DBNAME: planet9
+      DB_URI_POSTGRES: postgress://myuser:mypassword@db:5432/planet9
+      DB_TYPE: postgresql
     ports:
       - 8080:8080
 volumes:
