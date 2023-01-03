@@ -19,7 +19,7 @@ services:
     ports:
       - 3000:8080
   planet9:
-    image: neptunesoftware/planet9:v21.10.1
+    image: neptunesoftware/planet9:v22.10.1
     environment:
       DB_URI_POSTGRES: postgress://myuser:mypassword@db:5432/planet9
       DB_TYPE: postgresql
