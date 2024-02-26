@@ -11,7 +11,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - "pgdataV22100:/var/lib/postgresql/data"
+      - "pgdataV23103:/var/lib/postgresql/data"
       - ./db-init:/docker-entrypoint-initdb.d
   dbgui:
     image: adminer
@@ -19,11 +19,11 @@ services:
     ports:
       - 3000:8080
   planet9:
-    image: neptunesoftware/planet9:v22.10.0
+    image: neptunesoftware/planet9:v23.10.3
     environment:
       DB_URI_POSTGRES: postgress://myuser:mypassword@db:5432/planet9
       DB_TYPE: postgresql
     ports:
       - 8080:8080
 volumes:
-  pgdataV22100:
+  pgdataV23103:
