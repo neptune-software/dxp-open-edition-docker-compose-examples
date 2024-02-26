@@ -1,0 +1,53 @@
+version: "3.5"
+services:
+  db:
+    build:
+      context: .
+      dockerfile: postgres.dockerfile
+    container_name: postgres-network
+    restart: always
+    shm_size: 128mb
+    environment:
+      - POSTGRES_PASSWORD=docker
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: "pg_isready --username=docker && psql --username=docker --list"
+      timeout: 5s
+      retries: 20
+    networks:
+      - internal-net
+
+  planet9:
+    build:
+      context: .
+      dockerfile: p9.dockerfile
+    container_name: planet9-network
+    depends_on:
+      - db
+    environment:
+      - P9_SERVER_SCRIPTS_NPM=/home/planet9/npm
+      - DB_TYPE=postgresql
+      - DB_PSQL_HOST=db
+      - DB_PSQL_PORT=5432
+      - DB_PSQL_USER=docker
+      - DB_PSQL_PASSWORD=docker
+      - DB_PSQL_DBNAME=planet9
+    volumes:
+      - npm_volume:/home/planet9/npm:rw
+    ports:
+      - "5050:8080"
+    networks:
+      - external-net
+      - internal-net
+
+volumes:
+  npm_volume:
+
+networks:
+  internal-net:
+    driver: bridge
+    internal: true
+  external-net:
+    driver: bridge
+    internal: false
