@@ -1,0 +1,36 @@
+version: "3.5"
+services:
+  planet9:
+    build:
+      context: .
+      dockerfile: p9.dockerfile
+    container_name: planet9-network
+    depends_on:
+      - redis
+    environment:
+      - P9_SERVER_SCRIPTS_NPM=/home/planet9/npm
+      - DB_ENABLED_REDIS=true
+      - DB_URI_REDIS=redis://redis:6379
+    volumes:
+      - npm_volume:/home/planet9/npm:rw
+    ports:
+      - "5050:8080" # accessed at http://localhost:5050
+    networks:
+      - external-net
+  redis:
+      build:
+        context: .
+        dockerfile: redis.dockerfile
+      container_name: redis-network
+      ports:
+        - "6379:6379"
+      networks:
+      - external-net
+
+volumes:
+  npm_volume:
+
+networks:
+  external-net:
+    driver: bridge
+    internal: false
