@@ -26,7 +26,8 @@ services:
     depends_on:
       - db
     environment:
-      - P9_SERVER_SCRIPTS_NPM=/home/planet9/npm
+      - P9_SERVER_SCRIPTS_NPM=/home/planet9/npm/serverscript
+      - P9_WEBAPP_DIR=/home/planet9/npm/webapp
       - DB_TYPE=postgresql
       - DB_PSQL_HOST=db
       - DB_PSQL_PORT=5432
