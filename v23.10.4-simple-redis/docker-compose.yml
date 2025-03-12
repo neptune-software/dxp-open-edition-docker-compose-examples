@@ -8,7 +8,8 @@ services:
     depends_on:
       - redis
     environment:
-      - P9_SERVER_SCRIPTS_NPM=/home/planet9/npm
+      - P9_SERVER_SCRIPTS_NPM=/home/planet9/npm/serverscript
+      - P9_WEBAPP_DIR=/home/planet9/npm/webapp
       - DB_ENABLED_REDIS=true
       - DB_URI_REDIS=redis://redis:6379
     volumes:
