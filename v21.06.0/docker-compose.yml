@@ -18,6 +18,9 @@ services:
       - 3000:8080
   planet9:
     image: neptunesoftware/planet9:v21.6.0
+    restart: unless-stopped
+    depends_on:
+      - db
     environment:
       DB_URI_POSTGRES: postgress://myuser:mypassword@db:5432/planet9
       DB_TYPE: postgresql
